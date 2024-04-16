@@ -1,0 +1,35 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout') {
+            steps {
+                // Checkout the repository
+                git branch: 'main', credentialsId: 'authentication', url: 'https://github.com/tamilarasanfple/jenkinspipeline'
+            }
+        }
+
+        stage('Build and Test') {
+            steps {
+                // Run any build and test steps here
+            }
+        }
+
+        stage('Deploy with Docker Compose') {
+            steps {
+                // Use Docker Compose to deploy the application
+                script {
+                    // Make sure Docker is installed and running
+                    sh 'docker-compose --version'
+                    
+                    // Pull the latest images
+                    sh 'docker-compose pull'
+                    
+                    // Restart the services defined in the docker-compose.yml file
+                    sh 'docker-compose up -d'
+                }
+            }
+        }
+    }
+}
+
