@@ -8,13 +8,6 @@ pipeline {
                 git branch: 'main', credentialsId: 'authentication', url: 'https://github.com/tamilarasanfple/jenkinspipeline'
             }
         }
-
-        stage('Build and Test') {
-            steps {
-                // Run any build and test steps here
-            }
-        }
-
         stage('Deploy with Docker Compose') {
             steps {
                 // Use Docker Compose to deploy the application
